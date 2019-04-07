@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <h1 id="budget">2750</h1>
+        <input type="text" placeholder="item" id="item">
+        <input type="text" placeholder="quantity" id="quantity">
+        <input type="text" placeholder="price" id="price" >
+        <button type="button" onclick="newElement()">Add</button>
+        <table id ="myTable">
+            <tr>
+                <td >item</td>
+                <td>unit Price</td>
+                <td>quantity</td>
+                <td>total price</td>
+                <td></td>
+            </tr>
+        </table>
+       <style>
+       td {
+        padding-right:30px
+       }
+       </style>
+    <script>
+        function newElement(){ 
+    var table = document.getElementById("myTable")
+    var row = table.insertRow();
+
+    var item = document.getElementById("item").value;
+    var quantity = Number(document.getElementById("quantity").value);
+    var price = Number(document.getElementById("price").value);
+    var totalPrice = quantity * price;
+    //var cell0 = row.insertCell()
+
+    row.setAttribute("id",item)
+    var cell1 = row.insertCell()
+    var cell2 = row.insertCell()
+    var cell3 = row.insertCell()
+    var cell4 = row.insertCell()
+    var cell5 = row.insertCell()
+    cell1.innerHTML = item;
+    cell2.innerHTML = price;
+    cell3.innerHTML = quantity;
+    cell4.innerHTML = totalPrice;
+    //cell5.innerHTML = "<button type=\"button\" onclick=\"deleteFunc("+item+")\"> Delete </button>"
+    cell5.innerHTML = "<button type=\"button\" onclick=\"deleteFunc("+item+")\"> Delete </button>"
+
+    h1= document.getElementById("budget")
+    var oldBudget = parseFloat(h1.innerHTML)
+    console.log(oldBudget);
+    var newBudget= oldBudget - totalPrice;
+    h1.innerHTML = newBudget;
+    }
+
+    function deleteFunc(rowid) {
+     
+
+    var td = rowid.getElementsByTagName("td")
+    var budg = parseFloat(td[3].innerHTML)
+    
+    h1= document.getElementById("budget")
+    var oldBudget = parseFloat(h1.innerHTML)
+
+    var newBudget= oldBudget + budg;
+    h1.innerHTML = newBudget;
+
+
+    document.getElementById("myTable").deleteRow(rowid.rowIndex)
+    }
+   
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
